@@ -22,16 +22,20 @@ func _process(delta: float) -> void:
 	var velocity = Vector2.ZERO # The player's movement vector.
 	
 	if Input.is_action_just_pressed("shoot_projectile"):
-		shoot_projectile(velocity.x < 0)
+		shoot_projectile()
 
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
+		Global.direction = "right"
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
+		Global.direction = "left"
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
+		Global.direction = "down"
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		Global.direction = "up"
 		
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -55,14 +59,20 @@ func _physics_process(delta: float) -> void:
 	var screen_size = get_viewport_rect().size
 	global_position = global_position.clamp(Vector2(0,0), screen_size)
 
-func shoot_projectile(forward: bool) -> void:
+func shoot_projectile() -> void:
 	var projectile_instance = projectile_scene.instantiate()
 	projectile_container.add_child(projectile_instance)
 	projectile_instance.global_position = global_position
-	if forward:
+	
+	if Global.direction == "right":
 		projectile_instance.global_position.x += 80
-	else:
+	elif Global.direction == "left":
 		projectile_instance.global_position.x -= 80
+	elif Global.direction == "down":
+		projectile_instance.global_position.y += 80
+	else:
+		projectile_instance.global_position.y -= 80
+
 	# play projectile sound here
 
 func _on_body_entered(body: Node2D) -> void:
