@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	Global.camera.shake(0.2, 6)
 	hide() # Player disappears after being hit
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback
