@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed: int = -2500
+@export var speed: int = 500
 
 @onready var visible_notifier = $VisibleNotifier
 
@@ -14,19 +14,17 @@ func set_direction(new_direction):
 
 func _physics_process(delta: float) -> void:
 	if direction.x > 0:
-		global_position.x += 80
+		global_position.x += speed * delta
 	elif direction.x < 0:
-		global_position.x -= 80
+		global_position.x -= speed * delta
 	elif direction.y > 0:
-		global_position.y += 80
+		global_position.y += speed * delta
 	else:
-		global_position.y -= 80
-
-	position += direction * speed * delta
-	print(position)
+		global_position.y -= speed * delta
 
 func _on_screen_exited() -> void:
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
+	print("here")
 	queue_free()

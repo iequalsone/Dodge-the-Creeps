@@ -69,7 +69,17 @@ func _physics_process(delta: float) -> void:
 
 func shoot_projectile() -> void:
 	var projectile_instance = projectile_scene.instantiate()
-	projectile_instance.position = position
+	projectile_instance.global_position = global_position
+	
+	if facing_direction.x > 0:
+		projectile_instance.global_position.x += 80
+	elif facing_direction.x < 0:
+		projectile_instance.global_position.x -= 80
+	elif facing_direction.y > 0:
+		projectile_instance.global_position.y += 80
+	else:
+		projectile_instance.global_position.y -= 80
+		
 	projectile_instance.set_direction(facing_direction)
 	projectile_container.add_child(projectile_instance)
 
