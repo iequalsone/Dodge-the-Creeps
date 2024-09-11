@@ -25,6 +25,5 @@ func _physics_process(delta: float) -> void:
 func _on_screen_exited() -> void:
 	queue_free()
 
-func _on_area_entered(area: Area2D) -> void:
-	print("here")
-	queue_free()
+func _on_body_entered(body: Node2D) -> void:
+	body.die()
