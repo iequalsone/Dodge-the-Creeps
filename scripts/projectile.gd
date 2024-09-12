@@ -27,3 +27,4 @@ func _on_screen_exited() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	body.die()
+	queue_free()

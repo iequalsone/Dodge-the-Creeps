@@ -29,7 +29,9 @@ func show_game_over():
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
-	
+
+func get_score() -> String:
+	return $ScoreLabel.text
 	
 func update_score(score):
 	$ScoreLabel.text = str(score)
